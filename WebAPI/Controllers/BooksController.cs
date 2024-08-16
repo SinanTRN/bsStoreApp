@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Contracts;
 using Repositories.EfCore;
+using Services.Contracts;
 
 namespace WebAPI.Controllers
 {
@@ -11,9 +12,9 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IRepositoryManager _manager;
+        private readonly IServicesManager _manager;
 
-        public BooksController(IRepositoryManager manager)
+        public BooksController(IServicesManager manager)
         {
             _manager = manager;
         }
@@ -23,7 +24,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var books = _manager.Book.GetAllBooks(false);
+                var books = _manager.BookService.GetAllBooks(false);
                 return Ok(books);
 
             }
@@ -38,7 +39,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var book = _manager.Book.GetOneBookById(id,false);
+                var book = _manager.BookService.GetOneBookById(id,false);
                 if (book is null) return NotFound();//404
                 return Ok(book);
 
@@ -55,8 +56,7 @@ namespace WebAPI.Controllers
             {
                 if (book is null) return BadRequest();
 
-                _manager.Book.CreateOneBook(book);
-                _manager.Save();
+                _manager.BookService.CreateOneBook(book);
                 return StatusCode(201, book);
             }
             catch (Exception ex)
@@ -69,16 +69,10 @@ namespace WebAPI.Controllers
         {
             try
             {
+                if (book is null) return BadRequest();
                 //Check book
-                var entity = _manager.Book.GetOneBookById(id,true);
-
-                if (entity is null) return NotFound();//404
-                if (id != book.Id) return BadRequest();//400
-
-                entity.Title = book.Title;
-                entity.Price = book.Price;
-                _manager.Save();
-                return Ok(book);//200
+                _manager.BookService.UpdateOneBook(id, book, true);
+                return NoContent();//204
             }
             catch (Exception ex)
             {
@@ -90,15 +84,8 @@ namespace WebAPI.Controllers
         public IActionResult DeleteOneBook([FromRoute(Name = "id")] int id)
         {
             try
-            {
-                var entity = _manager.Book.GetOneBookById(id, true);
-                if (entity is null) return NotFound(new
-                {
-                    StatusCode = 404,
-                    message = $"Book with id:{id} could not found."
-                });//404
-                _manager.Book.DeleteOneBook(entity);
-                _manager.Save();
+            {               
+                _manager.BookService.DeleteOneBook(id,false);
                 return NoContent();//204
             }
             catch(Exception ex)
@@ -111,10 +98,10 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var entity =_manager.Book.GetOneBookById(id, true);
+                var entity =_manager.BookService.GetOneBookById(id, true);
                 if (entity is null) return NotFound();//404
                 bookPatch.ApplyTo(entity);
-                _manager.Book.Update(entity);
+                _manager.BookService.UpdateOneBook(id,entity,true);
                 return NoContent();//204
             }
             catch (Exception ex)

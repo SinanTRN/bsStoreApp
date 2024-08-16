@@ -14,6 +14,6 @@ namespace Services.Contracts
 
         Book CreateOneBook(Book book);
         void UpdateOneBook(int id,Book book, bool trackChanges);
-        void DeleteOneBook(Book book, bool trackChanges);
+        void DeleteOneBook(int id, bool trackChanges);
     }
 }

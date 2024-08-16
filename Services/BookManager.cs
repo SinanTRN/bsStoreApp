@@ -42,7 +42,7 @@ namespace Services
 
         public Book GetOneBookById(int id, bool trackChanges)
         {
-            return GetOneBookById(id, trackChanges);
+            return _manager.Book.GetOneBookById(id, trackChanges);
         }
 
         public void UpdateOneBook(int id, Book book, bool trackChanges)

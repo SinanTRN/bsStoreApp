@@ -8,6 +8,6 @@ namespace Services.Contracts
 {
     public interface IServicesManager
     {
-        IBookServices Service { get; }
+        IBookServices BookService { get; }
     }
 }
