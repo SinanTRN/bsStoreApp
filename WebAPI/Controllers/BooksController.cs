@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Repositories;
+using Repositories.EfCore;
 
 namespace WebAPI.Controllers
 {

@@ -1,6 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Repositories;
+using Repositories.EfCore;
 
 namespace WebAPI
 {
