@@ -1,15 +1,17 @@
 ﻿using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Contracts;
-using Repositories.EfCore;
 using Services.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebAPI.Controllers
+namespace Presentation.Controller
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/books")]
     public class BooksController : ControllerBase
     {
         private readonly IServicesManager _manager;
@@ -39,7 +41,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var book = _manager.BookService.GetOneBookById(id,false);
+                var book = _manager.BookService.GetOneBookById(id, false);
                 if (book is null) return NotFound();//404
                 return Ok(book);
 
@@ -84,11 +86,11 @@ namespace WebAPI.Controllers
         public IActionResult DeleteOneBook([FromRoute(Name = "id")] int id)
         {
             try
-            {               
-                _manager.BookService.DeleteOneBook(id,false);
+            {
+                _manager.BookService.DeleteOneBook(id, false);
                 return NoContent();//204
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -98,10 +100,10 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var entity =_manager.BookService.GetOneBookById(id, true);
+                var entity = _manager.BookService.GetOneBookById(id, true);
                 if (entity is null) return NotFound();//404
                 bookPatch.ApplyTo(entity);
-                _manager.BookService.UpdateOneBook(id,entity,true);
+                _manager.BookService.UpdateOneBook(id, entity, true);
                 return NoContent();//204
             }
             catch (Exception ex)
