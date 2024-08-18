@@ -25,6 +25,7 @@ namespace WebAPI
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
+            builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
             var logger = app.Services.GetRequiredService<ILoggerService>();
             // Configure the HTTP request pipeline.
