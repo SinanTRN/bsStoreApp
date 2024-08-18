@@ -2,6 +2,7 @@
 using Entities.DataTransferObjects;
 using Entities.Exceptions;
 using Entities.Models;
+using Microsoft.Extensions.Options;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -26,11 +27,12 @@ namespace Services
             _mapper = mapper;
         }
 
-        public Book CreateOneBook(Book book)
+        public BookDto CreateOneBook(BookDtoForInsertion bookDto)
         { 
-            _manager.Book.Create(book);
+            var entity=_mapper.Map<Book>(bookDto);
+            _manager.Book.Create(entity);
             _manager.Save();
-            return book;
+            return _mapper.Map<BookDto>(entity);
         }
 
         public void DeleteOneBook(int id, bool trackChanges)
@@ -52,11 +54,25 @@ namespace Services
             return _mapper.Map<IEnumerable<BookDto>>(books);
         }
 
-        public Book GetOneBookById(int id, bool trackChanges)
+        public BookDto GetOneBookById(int id, bool trackChanges)
         {
             var book= _manager.Book.GetOneBookById(id, trackChanges);
             if (book is null) throw new BookNotFoundException(id);
-            return book;
+            return _mapper.Map<BookDto>(book);
+        }
+
+        public (BookDtoForUpdate bookDtoForUpdate, Book book) GetOneBookForPatch(int id, bool trackChanges)
+        {
+            var book = _manager.Book.GetOneBookById(id,trackChanges);
+            if (book is null) throw new BookNotFoundException(id);
+            var bookDtoForUpdate=_mapper.Map<BookDtoForUpdate>(book);
+            return (bookDtoForUpdate, book);
+        }
+
+        public void SaveChangesForPatch(BookDtoForUpdate bookDtoForUpdate, Book book)
+        {
+            _mapper.Map(bookDtoForUpdate, book);
+            _manager.Save();
         }
 
         public void UpdateOneBook(int id, BookDtoForUpdate bookDto, bool trackChanges)
