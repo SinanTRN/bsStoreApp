@@ -20,3 +20,11 @@
 2024-08-19 15:47:00.2894 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
 2024-08-19 15:47:00.3044 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\turan\source\repos\bsStoreApp\WebAPI\bin\Debug\net8.0\NLog.config
 2024-08-19 15:47:00.3267 Info Configuration initialized.
+2024-08-19 17:02:22.3923 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-08-19 17:02:22.4030 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-08-19 17:02:22.4109 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\turan\source\repos\bsStoreApp\WebAPI\bin\Debug\net8.0\NLog.config
+2024-08-19 17:02:22.4109 Info Configuration initialized.
+2024-08-19 17:05:53.5588 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-08-19 17:05:53.5736 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-08-19 17:05:53.5910 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\turan\source\repos\bsStoreApp\WebAPI\bin\Debug\net8.0\NLog.config
+2024-08-19 17:05:53.6159 Info Configuration initialized.
