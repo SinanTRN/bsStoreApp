@@ -41,6 +41,7 @@ namespace WebAPI
             builder.Services.ConfigureLoggerService();
             builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.ConfigureActionFilters();
+            builder.Services.ConfigureCors();
             var app = builder.Build();
             var logger = app.Services.GetRequiredService<ILoggerService>();
             // Configure the HTTP request pipeline.
@@ -55,6 +56,7 @@ namespace WebAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
