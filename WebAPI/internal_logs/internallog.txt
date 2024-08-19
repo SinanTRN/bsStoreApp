@@ -4,3 +4,7 @@
 2024-08-17 12:57:12.5240 Info Configuration initialized.
 2024-08-17 13:00:03.7936 Info AppDomain Shutting down. LogFactory closing...
 2024-08-17 13:00:03.8109 Info LogFactory has been closed.
+2024-08-19 12:33:27.3191 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-08-19 12:33:27.3491 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-08-19 12:33:27.3491 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\turan\source\repos\bsStoreApp\WebAPI\bin\Debug\net8.0\NLog.config
+2024-08-19 12:33:27.3491 Info Configuration initialized.
